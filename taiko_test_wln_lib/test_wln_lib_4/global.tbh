@@ -1,0 +1,38 @@
+'DEFINES-------------------------------------------------------------
+
+#define WLN_DEBUG_PRINT 1
+#define WLN_WPA 1
+
+#if PLATFORM_ID=EM500 or PLATFORM_ID=EM500W
+	#define WLN_RESET_MODE 1 'there will be no dedicated reset, and all other lines are fixed
+#elif PLATFORM_ID=EM1206 or PLATFORM_ID=EM1206W
+	#define WLN_CLK PL_IO_NUM_14
+	#define WLN_CS PL_IO_NUM_15
+	#define WLN_DI PL_IO_NUM_12
+	#define WLN_DO PL_IO_NUM_13
+	#define WLN_RST PL_IO_NUM_11
+#else
+	'EM1000, NB1010,...
+	#define WLN_CLK PL_IO_NUM_53
+	#define WLN_CS PL_IO_NUM_49
+	#define WLN_DI PL_IO_NUM_52
+	#define WLN_DO PL_IO_NUM_50
+	#define WLN_RST PL_IO_NUM_51
+#endif
+
+'INCLUDES------------------------------------------------------------
+include "sock\trunk\sock.tbh" 'this lib is necessary for the WLN lib's operation
+include "settings\trunk\settings.tbh" 'this lib is necessary to save pre-shared master key
+includepp "settings.xtxt"
+include "wln\trunk\wln.tbh"
+
+'DECLARATIONS--------------------------------------------------------
+declare function connect_to_ap(byref ap_name as string, security_mode as pl_wln_security_modes, byref key as string, domain as pl_wln_domains) as en_wln_status_codes
+declare tcp_sock as byte
+
+const RESCAN_PERIOD=30							'<----- change as needed
+const RSSI_THRESHOLD=200						'<----- change as needed
+const AP_NAME="Tibbo9F"							'<----- change as needed
+const AP_PASSWORD="16836836"					'<----- change as needed
+const AP_SECURITY=WLN_SECURITY_MODE_WPA2		'<----- change as needed
+'use WLN_SECURITY_MODE_DISABLED, WLN_SECURITY_MODE_WEP64, WLN_SECURITY_MODE_WEP128, WLN_SECURITY_MODE_WPA1, or WLN_SECURITY_MODE_WPA2

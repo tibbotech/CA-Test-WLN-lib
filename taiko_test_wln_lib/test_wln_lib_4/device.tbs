@@ -1,0 +1,79 @@
+include "global.tbh"
+
+'====================================================================
+function connect_to_ap(byref ap_name as string, security_mode as pl_wln_security_modes, byref key as string, domain as pl_wln_domains) as en_wln_status_codes
+	dim pmk as string(32)
+
+	#if WLN_WPA
+		if security_mode=WLN_SECURITY_MODE_WPA1 or security_mode=WLN_SECURITY_MODE_WPA2 then 
+			if stg_get("APN",0)<>ap_name or stg_get("PW",0)<>key or stg_sg("PMK",0,pmk,EN_STG_GET)<>EN_STG_STATUS_OK then
+				'recalculate the key
+				pmk=wln_wpa_mkey_get(key,ap_name)
+				stg_set("PMK",0,pmk)
+				stg_set("APN",0,ap_name)
+				stg_set("PW",0,key)
+			else
+				pmk=stg_get("PMK",0) 'the key stays the same
+			end if
+		else
+			pmk=key
+		end if
+	#else
+		pmk=key
+	#endif
+
+	connect_to_ap=wln_start(ap_name,security_mode,pmk,domain)
+end function
+
+'--------------------------------------------------------------------
+sub callback_wln_ok()
+	pat.play("G~",PL_PAT_CANINT)
+end sub
+
+'--------------------------------------------------------------------
+sub callback_wln_failure(wln_state as en_wln_status_codes)
+	pat.play("-",PL_PAT_CANINT)
+	sock.num=tcp_sock
+	sock.discard
+end sub
+
+'--------------------------------------------------------------------
+sub callback_wln_pre_buffrq(required_buff_pages as byte)
+end sub
+
+'--------------------------------------------------------------------
+sub callback_wln_rescan_result(current_rssi as byte, scan_rssi as byte, different_ap as no_yes)
+	dim s as string(32)
+
+	if different_ap=NO or scan_rssi<current_rssi or scan_rssi-current_rssi<5 then
+		exit sub
+	end if
+	
+	select case AP_SECURITY
+	case WLN_SECURITY_MODE_DISABLED:
+		s=""
+	case WLN_SECURITY_MODE_WEP64,WLN_SECURITY_MODE_WEP128:
+		s=AP_PASSWORD
+	case else:
+		s=stg_get("PMK",0)
+	end select
+
+	wln_change(AP_NAME,AP_SECURITY,s)
+end sub
+
+'--------------------------------------------------------------------
+sub callback_wln_mkey_progress_update(progress as byte)
+	pat.play("B-**",PL_PAT_CANINT)
+end sub
+
+'--------------------------------------------------------------------
+sub callback_stg_error(byref stg_name_or_num as string,index as byte,status as en_stg_status_codes)
+end sub
+
+'--------------------------------------------------------------------
+sub callback_stg_pre_get(byref stg_name_or_num as string,index as byte,byref stg_value as string)
+end sub
+
+'--------------------------------------------------------------------
+sub callback_stg_post_set(byref stg_name_or_num as string, index as byte,byref stg_value as string)
+end sub
