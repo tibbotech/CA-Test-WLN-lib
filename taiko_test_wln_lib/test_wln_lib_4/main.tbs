@@ -43,7 +43,15 @@ sub on_sys_timer()
 			if rescan_tmr=0 then
 				rescan_tmr=RESCAN_PERIOD
 				if wln.rssi<=RSSI_THRESHOLD then
-					wln_rescan(AP_NAME)
+
+					#if SRC_LIB_VER < &h020003
+						wln_rescan(AP_NAME) 
+					#endif
+
+					#if SRC_LIB_VER >= &h020003
+						wln_rescan()
+					#endif
+				
 				end if
 			end if
 		end if

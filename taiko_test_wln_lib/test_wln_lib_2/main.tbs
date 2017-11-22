@@ -6,10 +6,18 @@ dim tcp_sock as byte
 sub on_sys_init()
 	wln.ip="192.168.1.50" '<--- set suitable IP here
 	
-	if wln_start("TIBB1",WLN_SECURITY_MODE_WEP64,"12345678AB",PL_WLN_DOMAIN_FCC)<>WLN_STATUS_OK then
-		sys.halt
-	end if
+	#if SRC_LIB_VER < &h020003
+		if wln_start("TIBB1",WLN_SECURITY_MODE_WEP64,"12345678AB",PL_WLN_DOMAIN_FCC)<>WLN_STATUS_OK then
+			sys.halt
+		end if
+	#endif
 
+	#if SRC_LIB_VER >= &h020003
+		if wln_start("Tibbo9F",WLN_SECURITY_MODE_WEP64,"16836836",PL_WLN_DOMAIN_FCC,YES,PL_WLN_ASCAN_INFRASTRUCTURE)<>WLN_STATUS_OK then
+			sys.halt
+		end if
+	#endif
+	
 	'configure loopback socket
 	tcp_sock=sock_get("TCP")
 	sock.num=tcp_sock
