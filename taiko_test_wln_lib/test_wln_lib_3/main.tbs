@@ -7,7 +7,7 @@ sub on_sys_init()
 	wln.ip="192.168.1.50"						'<--- set suitable IP here
 	
 	stg_start()
-	if connect_to_ap("TIBB1",WLN_SECURITY_MODE_WPA2,"12345678",PL_WLN_DOMAIN_FCC)<>WLN_STATUS_OK then
+	if connect_to_ap("Tibbo9F",WLN_SECURITY_MODE_WPA2,"16836836",PL_WLN_DOMAIN_FCC)<>WLN_STATUS_OK then
 		sys.halt
 	end if
 

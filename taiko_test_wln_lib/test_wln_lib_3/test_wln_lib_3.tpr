@@ -1,7 +1,7 @@
 [project]
 version=1
-platform=TPP3W(G2)
-src_lib_ver=2_01_00
+platform=TPP2W(G2)
+src_lib_ver=2_01_02
 name=test_wln_lib_3
 output=test_wln_lib_3.tpc
 debug=on
@@ -42,7 +42,7 @@ address=0.9.5.2.7.6
 [address9]
 platform=TPP2W(G2)
 transport=udp_winpcap
-address=0.9.5.2.7.6
+address=0.36.119.85.251.40
 [address10]
 platform=TPP3W
 transport=udp_winpcap
@@ -119,8 +119,7 @@ locked=no
 location=commonlib
 [file11]
 path=settings.xtxt
-type=text
-format=
-condition=
+type=xtext
+format=STG_lib_configurator
 locked=no
 location=project

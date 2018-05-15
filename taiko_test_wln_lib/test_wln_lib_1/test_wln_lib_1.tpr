@@ -1,7 +1,7 @@
 [project]
 version=1
-platform=TPP3W(G2)
-src_lib_ver=2_01_00
+platform=TPP2W(G2)
+src_lib_ver=2_01_02
 name=test_wln_lib_1
 output=test_wln_lib_1.tpc
 debug=on
@@ -18,7 +18,7 @@ address=0.255.2.3.4.191
 [address3]
 platform=TPP2W(G2)
 transport=udp_winpcap
-address=0.36.119.82.189.229
+address=0.36.119.85.251.40
 [address4]
 platform=EM500W
 transport=udp_winpcap

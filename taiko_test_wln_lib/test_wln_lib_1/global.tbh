@@ -1,5 +1,7 @@
 'DEFINES-------------------------------------------------------------
 #define WLN_DEBUG_PRINT 1
+#define WLN_AVAILABLE 2
+#define WLN_WPA 0
 'For version of TIDE prior to 5.04.03, this value should be defined
 '#define LIB_VER_2_10 'Define the library version here LIB_VER_2_00/LIB_VER_2_01/LIB_VER_2_03/LIB_VER_2_04/LIB_VER_2_10 
 
