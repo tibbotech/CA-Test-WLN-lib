@@ -1,7 +1,8 @@
 'DEFINES-------------------------------------------------------------
 
 #define WLN_DEBUG_PRINT 1
-#define WLN_WPA 1
+#define WLN_AVAILABLE 2
+#define WLN_WPA 0
 'For version of TIDE prior to 5.04.03, this value should be defined
 '#define LIB_VER_2_10 'Define the library version here LIB_VER_2_00/LIB_VER_2_01/LIB_VER_2_03/LIB_VER_2_04/LIB_VER_2_10 
 
@@ -41,7 +42,7 @@ declare tcp_sock as byte
 
 const RESCAN_PERIOD=30							'<----- change as needed
 const RSSI_THRESHOLD=200						'<----- change as needed
-const AP_NAME="TIBB1"							'<----- change as needed
-const AP_PASSWORD="12345678AB"					'<----- change as needed
+const AP_NAME="Tibbo9F"							'<----- change as needed
+const AP_PASSWORD="16836836"					'<----- change as needed
 const AP_SECURITY=WLN_SECURITY_MODE_WPA2		'<----- change as needed
 'use WLN_SECURITY_MODE_DISABLED, WLN_SECURITY_MODE_WEP64, WLN_SECURITY_MODE_WEP128, WLN_SECURITY_MODE_WPA1, or WLN_SECURITY_MODE_WPA2

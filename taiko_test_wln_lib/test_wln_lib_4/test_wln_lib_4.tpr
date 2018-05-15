@@ -1,11 +1,11 @@
 [project]
 version=1
 platform=TPP2W(G2)
-src_lib_ver=2_00
+src_lib_ver=2_01_02
 name=test_wln_lib_4
 output=test_wln_lib_4.tpc
 debug=on
-defines= /dLCD_TYPE=SAMSUNG_S6B0108 /dOBJECT_LCD=LCD_ENABLED /dOBJECT_FD=FD_ENABLED /dOBJECT_KP=KP_ENABLED /dOBJECT_WLN=WLN_ENABLED
+defines= /dLCD_TYPE=SAMSUNG_S6B0108 /dOBJECT_LCD=LCD_ENABLED /dOBJECT_FD=FD_ENABLED /dSTG_DEBUG_PRINT=1 /dOBJECT_KP=KP_ENABLED /dOBJECT_WLN=WLN_ENABLED
 transport=udp_winpcap
 [address1]
 platform=EM1000W
@@ -34,7 +34,7 @@ address=0.36.119.81.245.126
 [address7]
 platform=TPP2W(G2)
 transport=udp_winpcap
-address=0.36.119.82.189.229
+address=0.36.119.85.251.40
 [address8]
 platform=DS1102W
 transport=udp_winpcap

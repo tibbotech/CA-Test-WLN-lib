@@ -1,8 +1,8 @@
 >>APN	E	S	1	0	32	A	^	Access point name
 >>PW	E	S	1	0	32	A	^	Password
 >>PMK	E	S	1	32	32	A	12345678901234567890123456789012	Pre-shared master key
-
 #define STG_DESCRIPTOR_FILE "settings.xtxt"
 #define STG_MAX_NUM_SETTINGS 3
+#define STG_RAM_ARRAY_SIZE 0
 #define STG_MAX_SETTING_NAME_LEN 3
 #define STG_MAX_SETTING_VALUE_LEN 32
