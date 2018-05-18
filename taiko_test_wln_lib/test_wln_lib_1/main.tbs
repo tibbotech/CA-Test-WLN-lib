@@ -16,7 +16,6 @@ sub on_sys_init()
 	#endif
 		
 end sub
-
 '--------------------------------------------------------------------
 sub on_sys_timer()
 	wln_proc_timer()
