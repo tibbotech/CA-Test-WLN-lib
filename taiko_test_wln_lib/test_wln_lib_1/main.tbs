@@ -2,15 +2,18 @@ include "global.tbh"
 
 '====================================================================
 sub on_sys_init()
+
+	'For the GA1000 Wi-Fi module, only WEP security protocol is supported for this particular sample.
+	'For the WA2000	Wi-Fi module, WEP, WPA and WPA2 protocols are supported.
 	
 	#if SRC_LIB_VER < &h020003
-		if wln_start("TIBB1",WLN_SECURITY_MODE_WEP64,"12345678AB",PL_WLN_DOMAIN_FCC)<>WLN_STATUS_OK then
+		if wln_start("TibboWiFi",WLN_SECURITY_MODE_DISABLED,"",PL_WLN_DOMAIN_FCC)<>WLN_STATUS_OK then
 			sys.halt
 		end if
 	#endif
 
 	#if SRC_LIB_VER >= &h020003
-		if wln_start("Tibbo9F",WLN_SECURITY_MODE_WPA2,"16836836",PL_WLN_DOMAIN_FCC,YES,PL_WLN_ASCAN_INFRASTRUCTURE)<>WLN_STATUS_OK then
+		if wln_start("TibboWiFi",WLN_SECURITY_MODE_DISABLED,"",PL_WLN_DOMAIN_FCC,YES,PL_WLN_ASCAN_INFRASTRUCTURE)<>WLN_STATUS_OK then
 			sys.halt
 		end if
 	#endif

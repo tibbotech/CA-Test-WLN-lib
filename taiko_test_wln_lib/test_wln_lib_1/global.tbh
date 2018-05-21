@@ -17,8 +17,14 @@
 	'EM1000, NB1010,...
 	#define WLN_CLK PL_IO_NUM_53
 	#define WLN_CS PL_IO_NUM_49
+	'Used for internal debugging
+#if TIBBO_DEBUG_INTERNAL
+	#define WLN_DI PL_IO_NUM_27
+	#define WLN_DO PL_IO_NUM_25
+#else
 	#define WLN_DI PL_IO_NUM_52
 	#define WLN_DO PL_IO_NUM_50
+#endif
 	#define WLN_RST PL_IO_NUM_51
 #endif
 

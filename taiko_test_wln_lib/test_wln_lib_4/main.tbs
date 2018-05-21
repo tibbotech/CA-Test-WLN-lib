@@ -10,6 +10,10 @@ sub on_sys_init()
 	
 	stg_start()
 	
+	#if SRC_LIB_VER >= &h020102
+		detect_module_type()
+	#endif
+
 	if connect_to_ap(AP_NAME,AP_SECURITY,AP_PASSWORD,PL_WLN_DOMAIN_FCC)<>WLN_STATUS_OK then
 		sys.halt
 	end if
@@ -22,7 +26,7 @@ sub on_sys_init()
 	sys.buffalloc
 	sock.protocol=PL_SOCK_PROTOCOL_TCP
 	sock.targetinterface=PL_SOCK_INTERFACE_WLN
-	sock.targetip="192.168.1.67"				'<----- set suitable target IP here
+	sock.targetip="192.168.1.92"				'<----- set suitable target IP here
 	sock.targetport=1000						'<----- set suitable target port here
 end sub
 

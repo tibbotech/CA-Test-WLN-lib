@@ -5,7 +5,7 @@ src_lib_ver=2_01_02
 name=test_wln_lib_3
 output=test_wln_lib_3.tpc
 debug=on
-defines= /dLCD_TYPE=SAMSUNG_S6B0108 /dOBJECT_LCD=LCD_ENABLED /dOBJECT_FD=FD_ENABLED /dSTG_DEBUG_PRINT=1 /dOBJECT_KP=KP_ENABLED /dOBJECT_WLN=WLN_ENABLED
+defines= /dLCD_TYPE=SAMSUNG_S6B0108 /dWLN_WPA=1 /dOBJECT_LCD=LCD_ENABLED /dWLN_AVAILABLE=1 /dOBJECT_FD=FD_ENABLED /dSTG_DEBUG_PRINT=1 /dOBJECT_KP=KP_ENABLED /dOBJECT_WLN=WLN_ENABLED
 transport=udp_winpcap
 [address1]
 platform=EM1000W
@@ -119,8 +119,7 @@ locked=no
 location=commonlib
 [file11]
 path=settings.xtxt
-type=xtext
-format=STG_lib_configurator
-condition=
+type=text
+format=65001
 locked=no
 location=project

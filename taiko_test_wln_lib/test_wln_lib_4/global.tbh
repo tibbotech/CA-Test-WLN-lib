@@ -18,10 +18,17 @@
 	'EM1000, NB1010,...
 	#define WLN_CLK PL_IO_NUM_53
 	#define WLN_CS PL_IO_NUM_49
+	'Used for internal debugging
+#if TIBBO_DEBUG_INTERNAL
+	#define WLN_DI PL_IO_NUM_27
+	#define WLN_DO PL_IO_NUM_25
+#else
 	#define WLN_DI PL_IO_NUM_52
 	#define WLN_DO PL_IO_NUM_50
+#endif
 	#define WLN_RST PL_IO_NUM_51
 #endif
+
 
 'INCLUDES------------------------------------------------------------
 include "sock\trunk\sock.tbh" 'this lib is necessary for the WLN lib's operation
@@ -31,6 +38,7 @@ include "wln\trunk\wln.tbh"
 
 'DECLARATIONS--------------------------------------------------------
 declare function connect_to_ap(byref ap_name as string, security_mode as pl_wln_security_modes, byref key as string, domain as pl_wln_domains) as en_wln_status_codes
+declare sub detect_module_type()
 declare tcp_sock as byte
 	#if SRC_LIB_VER < &h020003
 		declare function wln_rescan(byref ap_name as string) as en_wln_status_codes
@@ -42,7 +50,7 @@ declare tcp_sock as byte
 
 const RESCAN_PERIOD=30							'<----- change as needed
 const RSSI_THRESHOLD=200						'<----- change as needed
-const AP_NAME="Tibbo9F"							'<----- change as needed
-const AP_PASSWORD="16836836"					'<----- change as needed
+const AP_NAME="TibboWiFi"						'<----- change as needed
+const AP_PASSWORD="Password"					'<----- change as needed
 const AP_SECURITY=WLN_SECURITY_MODE_WPA2		'<----- change as needed
 'use WLN_SECURITY_MODE_DISABLED, WLN_SECURITY_MODE_WEP64, WLN_SECURITY_MODE_WEP128, WLN_SECURITY_MODE_WPA1, or WLN_SECURITY_MODE_WPA2

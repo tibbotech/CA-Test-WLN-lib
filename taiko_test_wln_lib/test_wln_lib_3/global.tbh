@@ -31,4 +31,5 @@ include "wln\trunk\wln.tbh"
 
 'DECLARATIONS--------------------------------------------------------
 declare function connect_to_ap(byref ap_name as string, security_mode as pl_wln_security_modes, byref key as string, domain as pl_wln_domains) as en_wln_status_codes
+declare sub detect_module_type()
 declare tcp_sock as byte
