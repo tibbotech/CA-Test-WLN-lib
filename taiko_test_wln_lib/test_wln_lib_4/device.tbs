@@ -3,8 +3,6 @@ include "global.tbh"
 '====================================================================
 function connect_to_ap(byref ap_name as string, security_mode as pl_wln_security_modes, byref key as string, domain as pl_wln_domains) as en_wln_status_codes
 	dim pmk as string(32)
-	
-	detect_module_type()
 
 	#if WLN_WPA
 		if stg_get("MT",0)="1" then
@@ -38,39 +36,43 @@ function connect_to_ap(byref ap_name as string, security_mode as pl_wln_security
 end function
 
 sub detect_module_type()
+
+	if stg_get("MT",0)=0 then
 	
-	wln.csmap=WLN_CS
-	io.num=WLN_CS
-	io.enabled=YES
-	wln.dimap=WLN_DI
-	wln.domap=WLN_DO
-	io.num=WLN_DO
-	io.enabled=YES
-	wln.clkmap=WLN_CLK
-	io.num=WLN_CLK
-	io.enabled=YES
-	io.num=WLN_RST
-	io.enabled=YES
-	wln.disable
-	'reset Wi-Fi module
-	#if WLN_RESET_MODE 
-		'reset is controlled by the combination of CS and CLK
-		io.lineset(wln.csmap,HIGH)
-		io.lineset(wln.clkmap,LOW)
-		io.lineset(wln.clkmap,HIGH)
-	#else	
-		'there is a dedicated reset line
+		wln.csmap=WLN_CS
+		io.num=WLN_CS
+		io.enabled=YES
+		wln.dimap=WLN_DI
+		wln.domap=WLN_DO
+		io.num=WLN_DO
+		io.enabled=YES
+		wln.clkmap=WLN_CLK
+		io.num=WLN_CLK
+		io.enabled=YES
 		io.num=WLN_RST
-		io.state=LOW
-		dim delay as dword
-		delay = sys.timercountms
-		while sys.timercountms - delay < 1
-		wend
-		io.state=HIGH
-	#endif
-	
-	stg_set("MT",0,wln.moduletype)
+		io.enabled=YES
+		wln.disable
+		'reset Wi-Fi module
+		#if WLN_RESET_MODE 
+			'reset is controlled by the combination of CS and CLK
+			io.lineset(wln.csmap,HIGH)
+			io.lineset(wln.clkmap,LOW)
+			io.lineset(wln.clkmap,HIGH)
+		#else	
+			'there is a dedicated reset line
+			io.num=WLN_RST
+			io.state=LOW
+			dim delay as dword
+			delay = sys.timercountms
+			while sys.timercountms - delay < 1
+			wend
+			io.state=HIGH
+		#endif
 		
+		stg_set("MT",0,wln.moduletype)
+	
+	end if
+	
 end sub
 
 '--------------------------------------------------------------------

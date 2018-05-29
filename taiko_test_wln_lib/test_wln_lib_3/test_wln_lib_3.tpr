@@ -119,7 +119,7 @@ locked=no
 location=commonlib
 [file11]
 path=settings.xtxt
-type=text
-format=65001
+type=xtext
+format=STG_lib_configurator
 locked=no
 location=project

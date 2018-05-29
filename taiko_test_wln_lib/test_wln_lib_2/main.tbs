@@ -16,7 +16,7 @@ sub on_sys_init()
 	#endif
 
 	#if SRC_LIB_VER >= &h020003
-		if wln_start("TibboWiFi",WLN_SECURITY_MODE_DISABLED,"",PL_WLN_DOMAIN_FCC,YES,PL_WLN_ASCAN_INFRASTRUCTURE)<>WLN_STATUS_OK then
+		if wln_start("TibboWiFi",WLN_SECURITY_MODE_DISABLED,"Password",PL_WLN_DOMAIN_FCC,YES,PL_WLN_ASCAN_INFRASTRUCTURE)<>WLN_STATUS_OK then
 			sys.halt
 		end if
 	#endif

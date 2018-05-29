@@ -9,7 +9,7 @@ sub on_sys_init()
 	wln.ip="192.168.1.50"						'<----- set suitable IP here
 	
 	stg_start()
-	
+
 	#if SRC_LIB_VER >= &h020102
 		detect_module_type()
 	#endif
