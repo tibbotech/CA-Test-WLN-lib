@@ -7,7 +7,7 @@ sub on_sys_init()
 	wln.ip="192.168.1.50"						'<--- set suitable IP here
 	
 	stg_start()
-	stg_restore_multiple(EN_STG_INIT_MODE_OVERRIDE)
+	
 	#if SRC_LIB_VER >= &h020102
 		detect_module_type()
 	#endif

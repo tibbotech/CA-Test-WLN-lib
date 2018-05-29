@@ -121,5 +121,6 @@ location=commonlib
 path=settings.xtxt
 type=xtext
 format=STG_lib_configurator
+condition=
 locked=no
 location=project
