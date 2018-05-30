@@ -18,7 +18,7 @@ address=0.36.119.85.245.50
 [address3]
 platform=TPP2W(G2)
 transport=udp_broadcast
-address=0.36.119.85.251.40
+address=0.1.2.3.4.231
 [file1]
 path=main.tbs
 type=basic

@@ -73,14 +73,14 @@ path=wln\trunk\wln.tbs
 type=basic
 format=
 condition=
-locked=yes
+locked=no
 location=commonlib
 [file5]
 path=wln\trunk\wln.tbh
 type=header
 format=
 condition=
-locked=yes
+locked=no
 location=commonlib
 [file6]
 path=sock\trunk\sock.tbs

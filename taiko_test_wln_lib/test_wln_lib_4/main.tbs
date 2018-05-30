@@ -10,9 +10,6 @@ sub on_sys_init()
 	
 	stg_start()
 
-	#if SRC_LIB_VER >= &h020102
-		detect_module_type()
-	#endif
 
 	if connect_to_ap(AP_NAME,AP_SECURITY,AP_PASSWORD,PL_WLN_DOMAIN_FCC)<>WLN_STATUS_OK then
 		sys.halt
