@@ -34,7 +34,7 @@ address=0.36.119.81.245.126
 [address7]
 platform=TPP2W(G2)
 transport=udp_winpcap
-address=0.36.119.85.251.40
+address=
 [address8]
 platform=DS1102W
 transport=udp_winpcap
@@ -47,6 +47,10 @@ address=0.36.119.81.245.126
 platform=EM1206W
 transport=udp_winpcap
 address=0.9.5.2.7.6
+[address11]
+platform=DS1101N
+transport=udp_winpcap
+address=0.0.0.134.127.128
 [file1]
 path=main.tbs
 type=basic

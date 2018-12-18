@@ -5,7 +5,7 @@ src_lib_ver=2_01_02
 name=test_wln_lib_5
 output=test_wln_lib_5.tpc
 debug=on
-defines= /dWLN_AVAILABLE=2
+defines= /dWLN_WPA=1 /dWLN_AVAILABLE=2
 transport=udp_broadcast
 [address1]
 platform=SIMULATOR
@@ -18,7 +18,7 @@ address=0.36.119.85.245.50
 [address3]
 platform=TPP2W(G2)
 transport=udp_broadcast
-address=0.1.2.3.4.231
+address=
 [file1]
 path=main.tbs
 type=basic

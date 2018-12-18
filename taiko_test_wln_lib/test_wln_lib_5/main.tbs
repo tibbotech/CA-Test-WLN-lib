@@ -4,6 +4,12 @@ dim s as string
 '====================================================================
 sub on_sys_init()
 
+
+#if SYS_VER = 1000
+	sys.debugprint("Bluetooth is only supported on GEN2 devices\r\n")
+	sys.halt
+#endif 
+
 	#if SRC_LIB_VER < &h020003
 		if wln_start("TibboWiFi",WLN_SECURITY_MODE_WEP64,"Password",PL_WLN_DOMAIN_FCC)<>WLN_STATUS_OK then
 			sys.halt
@@ -22,25 +28,23 @@ sub on_sys_init()
 	bt.txbuffrq(4)	
 	sys.buffalloc
 	
-	bt.enable(yes)
+	bt.enable()
 	
 end sub
 
+#if SYS_VER = 2000
 '--------------------------------------------------------------------
 sub on_bt_event(bt_event as enum pl_bt_events)
-	
 	select case bt_event
-
-	case PL_BT_EVENT_DEV_CONNECTED:
+	case PL_BT_EVENT_CONNECTED:
 		sys.debugprint("BT Connected\r\n")
-	case PL_BT_EVENT_DEV_DISCONNECTED:
+	case PL_BT_EVENT_DISCONNECTED:
 		sys.debugprint("BT Disconnected\r\n")
-	case PL_BT_EVENT_DEV_POWER_ON:
+	case  PL_BT_EVENT_ENABLED:
 		bt.advertise = YES
-	case PL_BT_EVENT_DEV_POWER_OFF:
+	case PL_BT_EVENT_DISABLED:
 		sys.debugprint("BT Power Off\r\n")
 	end select
-	
 end sub
 
 '--------------------------------------------------------------------
@@ -54,6 +58,7 @@ sub on_bt_data_arrival()
 	end if
 	
 end sub
+#endif
 
 '--------------------------------------------------------------------
 sub on_sys_timer()

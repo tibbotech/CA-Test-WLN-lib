@@ -18,7 +18,7 @@ address=0.255.2.3.4.191
 [address3]
 platform=TPP2W(G2)
 transport=udp_winpcap
-address=0.36.119.85.251.40
+address=
 [address4]
 platform=EM500W
 transport=udp_winpcap
@@ -51,6 +51,10 @@ address=0.36.119.82.189.229
 platform=EM1202
 transport=udp_winpcap
 address=0.9.5.2.7.6
+[address12]
+platform=DS1101N
+transport=udp_winpcap
+address=0.0.0.134.127.128
 [file1]
 path=main.tbs
 type=basic
@@ -84,7 +88,7 @@ path=wln\trunk\wln.tbh
 type=header
 format=
 condition=
-locked=yes
+locked=no
 location=commonlib
 [file6]
 path=sock\trunk\sock.tbs

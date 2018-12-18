@@ -5,7 +5,7 @@ src_lib_ver=2_01_02
 name=test_wln_lib_3
 output=test_wln_lib_3.tpc
 debug=on
-defines= /dLCD_TYPE=SAMSUNG_S6B0108 /dWLN_WPA=1 /dOBJECT_LCD=LCD_ENABLED /dWLN_AVAILABLE=1 /dOBJECT_FD=FD_ENABLED /dSTG_DEBUG_PRINT=1 /dOBJECT_KP=KP_ENABLED /dOBJECT_WLN=WLN_ENABLED
+defines=/dLCD_TYPE=SAMSUNG_S6B0108 /dOBJECT_LCD=LCD_ENABLED /dOBJECT_FD=FD_ENABLED /dOBJECT_WLN=WLN_ENABLED /dWLN_WPA=1 /dWLN_AVAILABLE=1 /dSTG_DEBUG_PRINT=1 /dOBJECT_KP=KP_ENABLED
 transport=udp_winpcap
 [address1]
 platform=EM1000W
@@ -47,6 +47,10 @@ address=0.36.119.85.251.40
 platform=TPP3W
 transport=udp_winpcap
 address=0.9.5.2.7.6
+[address11]
+platform=DS1101N
+transport=udp_winpcap
+address=0.0.0.134.127.128
 [file1]
 path=main.tbs
 type=basic
