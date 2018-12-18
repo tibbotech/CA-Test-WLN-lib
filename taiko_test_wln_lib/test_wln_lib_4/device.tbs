@@ -22,7 +22,15 @@ function connect_to_ap(byref ap_name as string, security_mode as pl_wln_security
 		pmk=key
 	#endif
 
-	connect_to_ap=wln_start(ap_name,security_mode,pmk,domain)
+	#if SRC_LIB_VER < &h020003
+		connect_to_ap=wln_start(ap_name,security_mode,pmk,domain)
+	#endif
+
+	#if SRC_LIB_VER >= &h020003
+		connect_to_ap=wln_start(ap_name,security_mode,pmk,domain,YES,PL_WLN_ASCAN_INFRASTRUCTURE)
+	#endif
+
+
 end function
 
 '--------------------------------------------------------------------
@@ -76,4 +84,10 @@ end sub
 
 '--------------------------------------------------------------------
 sub callback_stg_post_set(byref stg_name_or_num as string, index as byte,byref stg_value as string)
+end sub
+
+sub callback_wln_starting_association()
+end sub
+
+sub callback_wln_rescan_for_better_ap()
 end sub
