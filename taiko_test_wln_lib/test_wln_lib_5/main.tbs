@@ -1,0 +1,63 @@
+include "global.tbh"
+dim s as string
+
+'====================================================================
+sub on_sys_init()
+
+	#if SRC_LIB_VER < &h020003
+		if wln_start("TibboWiFi",WLN_SECURITY_MODE_WEP64,"Password",PL_WLN_DOMAIN_FCC)<>WLN_STATUS_OK then
+			sys.halt
+		end if
+	#endif
+
+	#if SRC_LIB_VER >= &h020003
+		if wln_start("TibboWiFi",WLN_SECURITY_MODE_WPA2,"Password",PL_WLN_DOMAIN_FCC,YES,PL_WLN_ASCAN_INFRASTRUCTURE)<>WLN_STATUS_OK then
+			sys.halt
+		end if
+	#endif
+	
+	bt.emulation=PL_WLN_BT_EMULATION_MODE_NORDIC
+	bt.name="BT Echo Test"
+	bt.rxbuffrq(4)	
+	bt.txbuffrq(4)	
+	sys.buffalloc
+	
+	bt.enable(yes)
+	
+end sub
+
+'--------------------------------------------------------------------
+sub on_bt_event(bt_event as enum pl_bt_events)
+	
+	select case bt_event
+
+	case PL_BT_EVENT_DEV_CONNECTED:
+		sys.debugprint("BT Connected\r\n")
+	case PL_BT_EVENT_DEV_DISCONNECTED:
+		sys.debugprint("BT Disconnected\r\n")
+	case PL_BT_EVENT_DEV_POWER_ON:
+		bt.advertise = YES
+	case PL_BT_EVENT_DEV_POWER_OFF:
+		sys.debugprint("BT Power Off\r\n")
+	end select
+	
+end sub
+
+'--------------------------------------------------------------------
+sub on_bt_data_arrival()
+	
+	if bt.rxlen>0 then
+		s=bt.getdata(255)
+		sys.debugprint("Bluetooth: " + s +"\r\n")
+		bt.setdata(s)
+		bt.send
+	end if
+	
+end sub
+
+'--------------------------------------------------------------------
+sub on_sys_timer()
+	
+	wln_proc_timer()
+		
+end sub

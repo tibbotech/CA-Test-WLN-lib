@@ -1,10 +1,10 @@
 'DEFINES-------------------------------------------------------------
+
 #define WLN_DEBUG_PRINT 1
 #define WLN_AVAILABLE 1
 #define WLN_WPA 1
 'For version of TIDE prior to 5.04.03, this value should be defined
 '#define LIB_VER_2_10 'Define the library version here LIB_VER_2_00/LIB_VER_2_01/LIB_VER_2_03/LIB_VER_2_04/LIB_VER_2_10 
-
 
 #if PLATFORM_ID=EM500 or PLATFORM_ID=EM500W or PLATFORM_ID=EM1202W
 	#define WLN_RESET_MODE 1 'there will be no dedicated reset, and all other lines are fixed
@@ -25,11 +25,4 @@
 
 'INCLUDES------------------------------------------------------------
 include "sock\trunk\sock.tbh" 'this lib is necessary for the WLN lib's operation
-include "settings\trunk\settings.tbh" 'this lib is necessary to save pre-shared master key
-includepp "settings.xtxt"
 include "wln\trunk\wln.tbh"
-
-'DECLARATIONS--------------------------------------------------------
-declare function connect_to_ap(byref ap_name as string, security_mode as pl_wln_security_modes, byref key as string, domain as pl_wln_domains) as en_wln_status_codes
-declare sub detect_module_type()
-declare tcp_sock as byte

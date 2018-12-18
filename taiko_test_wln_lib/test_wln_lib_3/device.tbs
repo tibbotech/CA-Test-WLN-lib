@@ -3,17 +3,19 @@ include "global.tbh"
 '====================================================================
 function connect_to_ap(byref ap_name as string, security_mode as pl_wln_security_modes, byref key as string, domain as pl_wln_domains) as en_wln_status_codes
 	dim pmk as string(32)
-
+	wln_init()
 	#if WLN_WPA
-		if security_mode=WLN_SECURITY_MODE_WPA1 or security_mode=WLN_SECURITY_MODE_WPA2 then 
-			if stg_get("APN",0)<>ap_name or stg_get("PW",0)<>key or stg_sg("PMK",0,pmk,EN_STG_GET)<>EN_STG_STATUS_OK then
-				'recalculate the key
-				pmk=wln_wpa_mkey_get(key,ap_name)
-				stg_set("PMK",0,pmk)
-				stg_set("APN",0,ap_name)
-				stg_set("PW",0,key)
-			else
-				pmk=stg_get("PMK",0) 'the key stays the same
+		if wln.moduletype then
+			if security_mode=WLN_SECURITY_MODE_WPA1 or security_mode=WLN_SECURITY_MODE_WPA2 then 
+				if stg_get("APN",0)<>ap_name or stg_get("PW",0)<>key or stg_sg("PMK",0,pmk,EN_STG_GET)<>EN_STG_STATUS_OK then
+					'recalculate the key
+					pmk=wln_wpa_mkey_get(key,ap_name)
+					stg_set("PMK",0,pmk)
+					stg_set("APN",0,ap_name)
+					stg_set("PW",0,key)
+				else
+					pmk=stg_get("PMK",0) 'the key stays the same
+				end if
 			end if
 		else
 			pmk=key
@@ -31,6 +33,46 @@ function connect_to_ap(byref ap_name as string, security_mode as pl_wln_security
 	#endif
 
 end function
+
+sub detect_module_type()
+	
+	if stg_get("MT",0)=0 then
+	
+		wln.csmap=WLN_CS
+		io.num=WLN_CS
+		io.enabled=YES
+		wln.dimap=WLN_DI
+		wln.domap=WLN_DO
+		io.num=WLN_DO
+		io.enabled=YES
+		wln.clkmap=WLN_CLK
+		io.num=WLN_CLK
+		io.enabled=YES
+		io.num=WLN_RST
+		io.enabled=YES
+		wln.disable
+		'reset Wi-Fi module
+		#if WLN_RESET_MODE 
+			'reset is controlled by the combination of CS and CLK
+			io.lineset(wln.csmap,HIGH)
+			io.lineset(wln.clkmap,LOW)
+			io.lineset(wln.clkmap,HIGH)
+		#else	
+			'there is a dedicated reset line
+			io.num=WLN_RST
+			io.state=LOW
+			dim delay as dword
+			delay = sys.timercountms
+			while sys.timercountms - delay < 1
+			wend
+			io.state=HIGH
+		#endif
+		
+		stg_set("MT",0,wln.moduletype)
+	
+	end if
+	
+end sub
 
 '--------------------------------------------------------------------
 sub callback_wln_ok()
@@ -69,8 +111,10 @@ end sub
 sub callback_stg_post_set(byref stg_name_or_num as string, index as byte,byref stg_value as string)
 end sub
 
+'--------------------------------------------------------------------
 sub callback_wln_starting_association()
 end sub
 
+'--------------------------------------------------------------------
 sub callback_wln_rescan_for_better_ap()
 end sub

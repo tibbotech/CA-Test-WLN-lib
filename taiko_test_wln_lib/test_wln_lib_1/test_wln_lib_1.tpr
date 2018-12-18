@@ -1,11 +1,11 @@
 [project]
 version=1
-platform=TPP3W(G2)
-src_lib_ver=2_01_00
+platform=TPP2W(G2)
+src_lib_ver=2_01_02
 name=test_wln_lib_1
 output=test_wln_lib_1.tpc
 debug=on
-defines= /dLCD_TYPE=SAMSUNG_S6B0108 /dOBJECT_LCD=LCD_ENABLED /dOBJECT_FD=FD_ENABLED /dOBJECT_KP=KP_ENABLED /dOBJECT_WLN=WLN_ENABLED
+defines= /dLCD_TYPE=SAMSUNG_S6B0108 /dWLN_WPA=1 /dOBJECT_LCD=LCD_ENABLED /dWLN_AVAILABLE=1 /dOBJECT_FD=FD_ENABLED /dOBJECT_KP=KP_ENABLED /dOBJECT_WLN=WLN_ENABLED
 transport=udp_winpcap
 [address1]
 platform=EM1000W
@@ -18,7 +18,7 @@ address=0.255.2.3.4.191
 [address3]
 platform=TPP2W(G2)
 transport=udp_winpcap
-address=0.36.119.82.189.229
+address=0.36.119.85.251.40
 [address4]
 platform=EM500W
 transport=udp_winpcap
@@ -77,7 +77,7 @@ path=wln\trunk\wln.tbs
 type=basic
 format=
 condition=
-locked=yes
+locked=no
 location=commonlib
 [file5]
 path=wln\trunk\wln.tbh

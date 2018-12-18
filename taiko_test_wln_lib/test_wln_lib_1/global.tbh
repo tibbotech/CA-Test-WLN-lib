@@ -1,5 +1,7 @@
 'DEFINES-------------------------------------------------------------
 #define WLN_DEBUG_PRINT 1
+#define WLN_AVAILABLE 1
+#define WLN_WPA 1
 'For version of TIDE prior to 5.04.03, this value should be defined
 '#define LIB_VER_2_10 'Define the library version here LIB_VER_2_00/LIB_VER_2_01/LIB_VER_2_03/LIB_VER_2_04/LIB_VER_2_10 
 
@@ -15,8 +17,14 @@
 	'EM1000, NB1010,...
 	#define WLN_CLK PL_IO_NUM_53
 	#define WLN_CS PL_IO_NUM_49
+	'Used for internal debugging
+#if TIBBO_DEBUG_INTERNAL
+	#define WLN_DI PL_IO_NUM_27
+	#define WLN_DO PL_IO_NUM_25
+#else
 	#define WLN_DI PL_IO_NUM_52
 	#define WLN_DO PL_IO_NUM_50
+#endif
 	#define WLN_RST PL_IO_NUM_51
 #endif
 
